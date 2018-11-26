@@ -1,5 +1,15 @@
 <template>
+
 	<div class="hello">
+    <v-badge left>
+      <span slot="badge">6</span>
+      <v-icon
+        large
+        color="grey lighten-1"
+      >
+        shopping_cart
+      </v-icon>
+    </v-badge>
 		<h1>{{ msg }}</h1>
 		<h3>Installed CLI Plugins</h3>
 		<ul>

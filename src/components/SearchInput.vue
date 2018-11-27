@@ -70,7 +70,7 @@
         isLoading: false,
       };
     },
-    watch: {
+    watch: { 
       searchTerm (val) {
         console.log(val);
       },

@@ -6,7 +6,7 @@
                 class="elevation-1"
         >
             <template slot="items" slot-scope="props">
-                <td class="text-xs-right">{{ props.item.product.id }}</td>
+                <td class="text-xs-right"><v-img :src="props.item.product.images[0].src" /></td>
                 <td class="text-xs-right">{{ props.item.product.title }}</td>
                 <td class="text-xs-right">{{ props.item.quantity }}</td>
                 <td class="text-xs-right remove-item" @click="removeItem(props.item.product.id)">X</td>
@@ -26,8 +26,8 @@
             return {
                 headers: [
                     {
-                        text: 'ID',
-                        value: 'id'
+                        text: 'Image',
+                        value: 'image'
                     },
                     {
                         text: 'Title',

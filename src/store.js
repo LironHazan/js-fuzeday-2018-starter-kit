@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { client } from './services/shopify-client';
 
 Vue.use(Vuex)
 
@@ -13,14 +14,7 @@ export default new Vuex.Store({
             return state;
         },
         removeCartItem: (state, id) => {
-            let newCartList = [];
-            for (let i = 0; i < state.inCart.length; i++) {
-                if (state.inCart[i].id === id) {
-                    continue
-                }
-                newCartList.push(state.inCart[i])
-            }
-            state.inCart = newCartList
+            state.inCart = state.inCart.filter(item => item.id !== id)
             return state;
         }
     },

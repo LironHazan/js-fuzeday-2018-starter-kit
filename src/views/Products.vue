@@ -15,8 +15,10 @@
     name: 'products',
     data: function () {
       return {
+        initialProducts: [],
         products: [],
         searchTerm: 'ttt1',
+        snapshot: [],
       }
     },
     components: {
@@ -25,13 +27,17 @@
     },
     methods: {
       onSearch: function (val) {
-        console.log('in products: ', val)
+        const regex = new RegExp(`${val}`, 'g')
+        this.products = this.initialProducts.filter((product) => {
+          return (product.title.search(regex) > -1)
+        });
       }
     },
     mounted: function () {
       client.product.fetchAll()
       .then((products) => {
-        console.log(products)
+        console.log(products);
+        this.initialProducts = products;
         this.products = products;
       });
     }

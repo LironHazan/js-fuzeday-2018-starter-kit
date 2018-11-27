@@ -10,8 +10,8 @@ export default new Vuex.Store({
     mutations: {
         addToCart: (state, item) => {
             // get stored item in cart
-            let storedItemIndex = state.inCart.findIndex(c => c.itemId === item.itemId);
-            
+            let storedItemIndex = state.inCart.findIndex(c => c.product.id === item.product.id);
+
             // update or add item to cart
             if (storedItemIndex !== -1) {
                 state.inCart[storedItemIndex].quantity += item.quantity;
@@ -24,9 +24,24 @@ export default new Vuex.Store({
             if (state.inCart[storedItemIndex].quantity <= 0) {
                 state.inCart.splice(storedItemIndex, 1);
             }
-            
+
             return state;
         },
+        removeCartItem: (state, id) => {
+            state.inCart = state.inCart.filter((item) => {
+                if (item.product.id === id) {
+                    if (item.quantity > 1) {
+                        item.quantity--
+                        return true
+                    } else {
+                        return false;
+                    }
+                }
+                return true
+            })
+            console.log('remove', state.inCart);
+            return state;
+        }
     },
     getters: {
         inCart: (state) => state.inCart,
@@ -34,5 +49,6 @@ export default new Vuex.Store({
     },
     actions: {
         addToCart: (context, item) => context.commit('addToCart', item),
+        removeCartItem: (context, id) => context.commit('removeCartItem', id)
     }
 })

@@ -7,7 +7,7 @@
 				<v-container fluid grid-list-lg>
 					<v-layout row wrap>
 						<v-flex v-for="product in products" xs12 sm6 md3 class="product-box">
-							<Product :product="product" @add-item="addToCart"/>
+							<Product :product="product"/>
 						</v-flex>
 					</v-layout>
 				</v-container>
@@ -26,11 +26,6 @@ import Product from './Product.vue'
         },
         components: {
             Product
-		},
-		methods: {
-			addToCart: function(itemData) {
-				this.$store.dispatch('addToCart', itemData);
-			},
 		}
 	}
 </script>

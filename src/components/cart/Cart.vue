@@ -1,23 +1,21 @@
 <template>
     <div class="hello">
-        <table class="cart-table">
-            <tr>
-                <th>Title</th>
-                <th>Id</th>
-                <th>Created At</th>
-                <th>Tags</th>
-                <th>Vendor</th>
-                <th>Description</th>
-            </tr>
-            <tr v-for="item in productsInCart">
-
-            </tr>
-        </table>
+        <v-data-table
+                :headers="headers"
+                :items="$store.getters.inCart"
+                class="elevation-1"
+        >
+            <template slot="items" slot-scope="props">
+                <td class="text-xs-right">{{ props.item.product.id }}</td>
+                <td class="text-xs-right">{{ props.item.product.title }}</td>
+                <td class="text-xs-right">{{ props.item.quantity }}</td>
+                <td class="text-xs-right remove-item" @click="removeItem(props.item.product.id)">X</td>
+            </template>
+        </v-data-table>
     </div>
 </template>
 
 <script>
-    import {client} from '../../services/shopify-client';
 
     export default {
         name: 'Cart',
@@ -25,9 +23,34 @@
             msg: String
         },
         data: function () {
-            return {productsInCart: this.$store.getters.inCart};
+            return {
+                headers: [
+                    {
+                        text: 'ID',
+                        value: 'id'
+                    },
+                    {
+                        text: 'Title',
+                        value: 'title'
+                    },
+                    {
+                        text: 'Quantity',
+                        value: 'quantity'
+                    },
+                    {
+                        text: 'Remove Item',
+                        value: 'removeItem'
+                    }
+                ]
+            };
         },
         mounted: function () {
+        },
+        methods: {
+            removeItem: function (id) {
+                console.log('remove item id: ', id)
+                this.$store.dispatch('removeCartItem', id);
+            }
         }
     }
 </script>
@@ -39,29 +62,10 @@
         width: 90%;
         border: 1px solid black;
         cursor: pointer;
+    }
 
-        td, th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: cornflowerblue;
-            color: white;
-        }
-
-
+    .remove-item {
+        cursor: pointer;
     }
 
     h3 {

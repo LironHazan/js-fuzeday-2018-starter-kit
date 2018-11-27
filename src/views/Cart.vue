@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="home">
 		<Cart> </Cart>
 	</div>
 </template>
@@ -14,3 +14,8 @@
         }
     }
 </script>
+<style scoped lang="scss">
+	.home {
+		padding-top: 90px;
+	}
+</style>

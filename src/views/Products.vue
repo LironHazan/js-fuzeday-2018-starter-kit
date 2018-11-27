@@ -62,3 +62,8 @@
     }
   }
 </script>
+<style scoped lang="scss">
+	.home {
+		padding-top: 90px;
+	}
+</style>

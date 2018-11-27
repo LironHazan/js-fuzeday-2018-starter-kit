@@ -1,97 +1,80 @@
 <template>
-    <div id="test1">
-        <div class="search-wrapper">
-            <input type="text" v-model="search" placeholder="Search title.."/>
-            <label>Search title:</label>
-        </div>
-        <div class="wrapper">
-            <div class="card" v-for="post in filteredList">
-                <a v-bind:href="post.link" target="_blank">
-                    <img v-bind:src="post.img"/>
-                    <small>posted by: {{ post.author }}</small>
-                    {{ post.title }}
-                </a>
-            </div>
-        </div>
-    </div>
+    <v-autocomplete
+            v-model="model"
+            :items="items"
+            :loading="isLoading"
+            :search-input.sync="searchTerm"
+            chips
+            clearable
+            hide-details
+            hide-selected
+            item-text="name"
+            item-value="symbol"
+            label="Search for a product..."
+            solo
+            prepend-icon="search"
+    >
+        <template slot="no-data">
+            <v-list-tile>
+                <v-list-tile-title>
+                    Search for your favorite
+                    <strong>Cryptocurrency</strong>
+                </v-list-tile-title>
+            </v-list-tile>
+        </template>
+        <template
+                slot="selection"
+                slot-scope="{ item, selected }"
+        >
+            <v-chip
+                    :selected="selected"
+                    color="blue-grey"
+                    class="white--text"
+            >
+                <v-icon left>mdi-coin</v-icon>
+                <span v-text="item.name"></span>
+            </v-chip>
+        </template>
+        <template
+                slot="item"
+                slot-scope="{ item, tile }"
+        >
+            <v-list-tile-avatar
+                    color="indigo"
+                    class="headline font-weight-light white--text"
+            >
+                {{ item.name.charAt(0) }}
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+                <v-list-tile-title v-text="item.name"></v-list-tile-title>
+                <v-list-tile-sub-title v-text="item.symbol"></v-list-tile-sub-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+                <v-icon>search</v-icon>
+            </v-list-tile-action>
+        </template>
+    </v-autocomplete>
 </template>
+
 <script>
-  class Post {
-    constructor(title, link, author, img) {
-      this.title = title;
-      this.link = link;
-      this.author = author;
-      this.img = img;
+  export default {
+    name: 'SearchInput',
+    props: {
+
+    },
+    data: () => {
+      return {
+        searchTerm: 'test me 1',
+        items: [],
+        model: null,
+        isLoading: false,
+      };
+    },
+    watch: {
+      searchTerm (val) {
+        console.log(val);
+      },
     }
   }
 
-  const app = new Vue({
-    el: '#app',
-    data: {
-      search: '',
-      postList: [
-        new Post(
-          'Vue.js',
-          'https://vuejs.org/',
-          'Chris',
-          'https://vuejs.org//images/logo.png'
-        ),
-        new Post(
-          'React.js',
-          'https://facebook.github.io/react/',
-          'Tim',
-          'https://daynin.github.io/clojurescript-presentation/img/react-logo.png'
-        ),
-        new Post(
-          'Angular.js',
-          'https://angularjs.org/',
-          'Sam',
-          'https://angularjs.org/img/ng-logo.png'
-        ),
-        new Post(
-          'Ember.js',
-          'http://emberjs.com/',
-          'Rachel',
-          'http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a?s=200'
-        ),
-        new Post(
-          'Meteor.js',
-          'https://www.meteor.com/',
-          'Chris',
-          'http://hacktivist.in/introduction-to-nodejs-mongodb-meteor/img/meteor.png'
-        ),
-        new Post(
-          'Aurelia',
-          'http://aurelia.io/',
-          'Tim',
-          'https://cdn.auth0.com/blog/aurelia-logo.png'
-        ),
-        new Post(
-          'Node.js',
-          'https://nodejs.org/en/',
-          'A. A. Ron',
-          'https://code-maven.com/img/node.png'
-        ),
-        new Post(
-          'Pusher',
-          'https://pusher.com/',
-          'Alex',
-          'https://avatars1.githubusercontent.com/u/739550?v=3&s=400'
-        ),
-        new Post(
-          'Feathers.js',
-          'http://feathersjs.com/',
-          'Chuck',
-          'https://cdn.worldvectorlogo.com/logos/feathersjs.svg'
-        ),
-      ]
-    },
-    computed: {
-      filteredList() {
-        return this.postList.filter(post => {
-          return post.title.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
-    }
-  })
 </script>

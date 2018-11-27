@@ -1,9 +1,9 @@
 <template>
-    <v-card color="cyan darken-2" class="white--text">
+    <v-card color="#2c3e50" class="white--text">
         <v-layout>
             <v-flex xs5>
                 <v-img
-                        src={{product.images[0].src}}
+                        :src="product ? product.images[0].src : ''"
                         height="125px"
                         contain
                 ></v-img>
@@ -20,7 +20,7 @@
         </v-layout>
         <v-divider light></v-divider>
         <v-card-actions class="pa-3">
-            Rate this product
+            Rate this prouc
             <v-spacer></v-spacer>
             <v-icon>star_border</v-icon>
             <v-icon>star_border</v-icon>
@@ -32,10 +32,17 @@
 </template>
 
 <script>
-    export default {
-        name: "ProductInfo",
-      props: ['product']
+  export default {
+    name: "ProductInfo",
+    props: {
+      product: Object,
+    },
+    mounted: function () {
+      // const productId = this.$route.params.id;
+      this.product = this.$store.getters.getProduct;
+      console.log(this.product);
     }
+  }
 </script>
 
 <style scoped>

@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        inCart: []
+        inCart: [],
+      product: []
     },
     mutations: {
         addToCart: (state, item) => {
@@ -41,14 +42,21 @@ export default new Vuex.Store({
             })
             console.log('remove', state.inCart);
             return state;
+        },
+        setProduct: (state, product) => {
+            state.product = product;
+            return state;
         }
+
     },
     getters: {
         inCart: (state) => state.inCart,
         inCartAmount: (state) => state.inCart.length,
+        getProduct: (state) => state.product,
     },
     actions: {
         addToCart: (context, item) => context.commit('addToCart', item),
+        setProduct: (context, item) => context.commit('setProduct', item),
         removeCartItem: (context, id) => context.commit('removeCartItem', id)
     }
 })

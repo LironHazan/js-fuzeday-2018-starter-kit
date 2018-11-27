@@ -1,28 +1,22 @@
 <template>
-	<div class="home">
-		<ProductInfo> </ProductInfo>
-	</div>
+    <div class="home">
+        <ProductInfo :product="product" />
+    </div>
 </template>
 <script>
-    // @ is an alias to /src
-    import ProductInfo from '@/components/productInfo/ProductInfo.vue'
+  // @ is an alias to /src
+  import ProductInfo from '@/components/productInfo/ProductInfo.vue'
 
-    export default {
-        name: 'product',
-        components: {
-            ProductInfo
-        },
-        mounted: function () {
-            client.product.fetchAll()
-                .then((products) => {
-                    console.log(products)
-                    this.products = products;
-                });
-        }
-    }
+  export default {
+    name: 'product',
+    props: [ 'product' ],
+    components: {
+      ProductInfo
+    },
+  }
 </script>
 <style scoped lang="scss">
-	.home {
-		padding-top: 90px;
-	}
+    .home {
+        padding-top: 90px;
+    }
 </style>

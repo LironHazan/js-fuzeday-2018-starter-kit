@@ -32,7 +32,8 @@
                 this.$store.dispatch('addToCart', {product: this.product, quantity: itemData.quantity});
             },
            goToProduct: function() {
-			this.$router.push({path: `/product/${id}` });
+              this.$store.dispatch('setProduct', this.product);
+			this.$router.push({path: `/product/${this.product.id}`, props: { product: this.product }});
 		    }
         }
     }

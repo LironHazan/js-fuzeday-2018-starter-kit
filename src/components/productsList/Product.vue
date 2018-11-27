@@ -3,6 +3,7 @@
         :id="product.id"
         :title="product.title"
         :image="image"
+        @add-item="addItem"
     />
 </template>
 <script>
@@ -22,6 +23,11 @@
                     src: this.product.images && this.product.images[0].src,
                 },
             }
+        },
+        methods: {
+            addItem: function(itemData) {
+                this.$emit('add-item', itemData);
+            },
         }
     }
 </script>

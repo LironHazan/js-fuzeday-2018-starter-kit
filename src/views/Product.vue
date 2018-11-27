@@ -11,6 +11,13 @@
         name: 'product',
         components: {
             ProductInfo
+        },
+        mounted: function () {
+            client.product.fetchAll()
+                .then((products) => {
+                    console.log(products)
+                    this.products = products;
+                });
         }
     }
 </script>

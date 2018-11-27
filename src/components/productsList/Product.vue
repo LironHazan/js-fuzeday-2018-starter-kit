@@ -5,12 +5,14 @@
         :id="product.id"
         :title="product.title"
         :image="image"
+        :priceRange="priceRange"
         @add-item="addToCart"
     />
 </div>
 </template>
 <script>
     import ProductCard from '@/components/sharable/ProductCard.vue';
+    import {getProductPriceRange} from '@/utils/product.utils';
 
     export default {
         name: "Product",
@@ -25,6 +27,7 @@
                 image: {
                     src: this.product.images && this.product.images[0].src,
                 },
+                priceRange: getProductPriceRange(this.product),
             }
         },
         methods: {

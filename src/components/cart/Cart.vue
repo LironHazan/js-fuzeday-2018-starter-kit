@@ -48,7 +48,6 @@
         },
         methods: {
             removeItem: function (id) {
-                console.log('remove item id: ', id)
                 this.$store.dispatch('removeCartItem', id);
             }
         }

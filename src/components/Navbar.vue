@@ -1,21 +1,23 @@
 <template>
 	<div class="navbar">
 		<router-link to="/">Products</router-link>
-		<v-badge left color="red" @click="moveToCart">
-			<span slot="badge">{{$store.getters.inCartAmount}}</span>
-			<v-icon
-				large
-				color="grey lighten-1">
-				shopping_cart
-			</v-icon>
-    	</v-badge>
+		<a class="link" @click="moveToCart">
+			<v-badge left color="red" @click="moveToCart">
+				<span slot="badge">{{$store.getters.inCartAmount}}</span>
+				<v-icon
+					large
+					color="grey lighten-1">
+					shopping_cart
+				</v-icon>
+			</v-badge>
+		</a>
 	</div>
 </template>
 <script>
 export default {
 	methods: {
-		moveToCart: () => {
-			console.log('move to /cart....');
+		moveToCart: function() {
+			this.$router.push({ name: 'cart' });
 		}
 	}
 }
@@ -34,6 +36,7 @@ export default {
 		border-bottom: 1px solid #eee;
 
 		a {
+			cursor: pointer;
 			padding-left: 10px;
 			color: lightblue;
 			padding-left: 2rem;

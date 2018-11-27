@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Products from './views/Products.vue'
+import Product from './views/Product.vue'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "help" */ './views/Cart.vue')
-    }
+    },
+    {
+      path: '/product/:id',
+      name: 'product',
+      component: Product
+    },
   ]
 })

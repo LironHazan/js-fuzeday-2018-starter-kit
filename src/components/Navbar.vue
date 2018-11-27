@@ -3,7 +3,7 @@
 		<router-link to="/">Products</router-link>
 		<router-link to="/cart">
 		    <v-badge left color="red">
-      			<span slot="badge">6</span>
+      			<span slot="badge">{{cartCount}}</span>
 				<v-icon
 					large
 					color="grey lighten-1">
@@ -13,6 +13,16 @@
 		</router-link>
 	</div>
 </template>
+<script>
+export default {
+	data: function() {
+		return {
+			cartCount: this.$store.getters.inCartAmount
+		}
+	}
+}
+</script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

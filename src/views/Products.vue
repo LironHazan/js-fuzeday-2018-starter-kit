@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <ProductsList msg="Products Main"/>
+    <ProductsList/>
   </div>
 </template>
 

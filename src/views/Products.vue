@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <SearchInput v-on:search="onSearch"/>
-        <ProductsList msg="Products Main" :products="products"/>
+        <ProductsList :products="products"/>
     </div>
 </template>
 

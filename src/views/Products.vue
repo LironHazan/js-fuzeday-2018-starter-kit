@@ -31,10 +31,20 @@
     },
     methods: {
       onSearch: function (val) {
-        const regex = new RegExp(`${val}`, 'g')
+        if (!val) {
+          this.products = this.initialProducts;
+          return;
+        }
+        const trimmed = val.replace(/ +(?= )/g,'');
+        const splited = trimmed.split(' ');
+        const regex = splited.map(word => ("(?=.*\\b" + word + "\\b)"))
+        .join('');
+        console.log(regex);
+        const searchExp = new RegExp(regex, "gi");
         this.products = this.initialProducts.filter((product) => {
-          return (product.title.search(regex) > -1)
+          return searchExp.test(product.title)
         });
+        console.log(this.products);
       }
     },
     mounted: function () {

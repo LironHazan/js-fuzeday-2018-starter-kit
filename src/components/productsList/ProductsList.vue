@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { client } from '../../services/shopify-client';
 import Product from './Product.vue'
 
 	export default {
@@ -28,9 +27,6 @@ import Product from './Product.vue'
         },
         components: {
             Product
-        },
-        data: function () {
-            return { products: [] };
         },
 	}
 </script>

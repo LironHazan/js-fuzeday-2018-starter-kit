@@ -6,17 +6,16 @@
                 class="elevation-1"
         >
             <template slot="items" slot-scope="props">
-                <td class="text-xs-right"><v-img :src="props.item.product.images[0].src" /></td>
-                <td class="text-xs-right">{{ props.item.product.title }}</td>
-                <td class="text-xs-right">{{ props.item.quantity }}</td>
-                <td class="text-xs-right remove-item" @click="removeItem(props.item.product.id)">X</td>
+                <td class="text-xs-left"><v-img :src="props.item.product.images[0].src" /></td>
+                <td class="text-xs-left">{{ props.item.product.title }}</td>
+                <td class="text-xs-left">{{ props.item.quantity }}</td>
+                <td class="text-xs-left remove-item" @click="removeItem(props.item.product.id)">X</td>
             </template>
         </v-data-table>
     </div>
 </template>
 
 <script>
-
     export default {
         name: 'Cart',
         props: {

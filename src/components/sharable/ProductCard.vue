@@ -30,8 +30,8 @@
             };
         },
         methods: {
-            addItem: function(quantity) {
-                this.$emit('addItem', {itemId: this.id, quantity});
+            addItem: function(quantity = 1) {
+                this.$emit('add-item', {itemId: this.id, quantity});
             }
         }
     }

@@ -7,9 +7,9 @@
         >
             <template slot="items" slot-scope="props">
                 <td>{{ props.item.title }}</td>
-                <td class="text-xs-right">{{ props.item.id }}</td>
+                <td class="text-xs-right">{{ props.item.itemId }}</td>
                 <td class="text-xs-right">{{ props.item.vendor }}</td>
-                <td class="text-xs-right" @click="removeItem(item.id)">X</td>
+                <td class="text-xs-right" @click="removeItem(item.itemId)">X</td>
             </template>
         </v-data-table>
     </div>

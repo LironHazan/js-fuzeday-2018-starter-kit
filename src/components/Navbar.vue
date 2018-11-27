@@ -1,23 +1,21 @@
 <template>
 	<div class="navbar">
 		<router-link to="/">Products</router-link>
-		<router-link to="/cart">
-		    <v-badge left color="red">
-      			<span slot="badge">{{cartCount}}</span>
-				<v-icon
-					large
-					color="grey lighten-1">
-					shopping_cart
-      			</v-icon>
-    		</v-badge>
-		</router-link>
+		<v-badge left color="red" @click="moveToCart">
+			<span slot="badge">{{$store.getters.inCartAmount}}</span>
+			<v-icon
+				large
+				color="grey lighten-1">
+				shopping_cart
+			</v-icon>
+    	</v-badge>
 	</div>
 </template>
 <script>
 export default {
-	data: function() {
-		return {
-			cartCount: this.$store.getters.inCartAmount
+	methods: {
+		moveToCart: () => {
+			console.log('move to /cart....');
 		}
 	}
 }

@@ -28,7 +28,17 @@ export default new Vuex.Store({
             return state;
         },
         removeCartItem: (state, id) => {
-            state.inCart = state.inCart.filter(item => item.product.id !== id)
+            state.inCart = state.inCart.filter((item) => {
+                if (item.product.id === id) {
+                    if (item.quantity > 1) {
+                        item.quantity--
+                        return true
+                    } else {
+                        return false;
+                    }
+                }
+                return true
+            })
             console.log('remove', state.inCart);
             return state;
         }

@@ -29,7 +29,12 @@
         },
         methods: {
             addToCart: function(itemData) {
-                this.$store.dispatch('addToCart', {product: this.product, quantity: itemData.quantity});
+                this.$store.dispatch('addToCart', {
+                    product: this.product,
+                    quantity: {
+                        [this.product.variants[0].id]: itemData.quantity,
+                    }
+                });
             }
         }
     }

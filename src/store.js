@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { stat } from 'fs';
 
 Vue.use(Vuex)
 
@@ -10,19 +11,32 @@ export default new Vuex.Store({
     mutations: {
         addToCart: (state, item) => {
             // get stored item in cart
-            let storedItemIndex = state.inCart.findIndex(c => c.product.id === item.product.id);
+            let productIndex = state.inCart.findIndex(c => c.product.id === item.product.id);
 
             // update or add item to cart
-            if (storedItemIndex !== -1) {
-                state.inCart[storedItemIndex].quantity += item.quantity;
+            if (productIndex !== -1) {
+                Object.keys(item.quantity).forEach(variantId => {
+                    if (state.inCart[productIndex].product.variants.findIndex(c => c.id === variantId) === -1) {
+                        state.inCart[productIndex].quantity[variantId] = 0;
+                    }
+                    state.inCart[productIndex].quantity[variantId] += item.quantity[variantId];
+                });
             } else {
                 state.inCart.push(item);
-                storedItemIndex = state.inCart.length - 1;
+                productIndex = state.inCart.length - 1;
             }
 
-            // remove item from cart if quantity is not greater than 0
-            if (state.inCart[storedItemIndex].quantity <= 0) {
-                state.inCart.splice(storedItemIndex, 1);
+            // remove empty variants quantities
+            state.inCart[productIndex].quantity = Object.keys(state.inCart[productIndex].quantity).reduce((acc, variantId) => {
+                if (state.inCart[productIndex].quantity[variantId] > 0) {
+                    acc[variantId] = state.inCart[productIndex].quantity[variantId];
+                }
+                return acc;
+            }, {});
+
+            // remove item from cart if no variant is selected
+            if (Object.keys(state.inCart[productIndex].quantity).length === 0) {
+                state.inCart.splice(productIndex, 1);
             }
 
             return state;

@@ -7,7 +7,7 @@
 			<v-layout align-center>
 				<v-container fluid grid-list-lg>
 					<v-layout row wrap>
-						<v-flex v-for="product in products" xs12 sm6 md3 class="product-box">
+						<v-flex v-for="product in products" xs12 sm6 md4 class="product-box">
 							<Product :product="product" @add-item="addToCart"/>
 						</v-flex>
 					</v-layout>

@@ -1,6 +1,12 @@
 <template>
     <v-card :hover="true" height="100%">
         <v-img :src="image.src" />
+
+        <div class="product-price-range">
+            {{ (priceRange[0] === priceRange[1])
+                ? `$${priceRange[0]}`
+                : `$${priceRange[0]} - $${priceRange[1]}`}}
+        </div>
         
         <v-card-title primary-title>
             <div>
@@ -23,6 +29,7 @@
             id: String,
             title: String,
             image: Object,
+            priceRange: Array,
         },
         data: function() {
             return {
@@ -42,6 +49,15 @@
         font-size: 20px;
         line-height: 28px;
         word-break: break-word;
+    }
+
+    .product-price-range {
+        font-size: 22px;
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 1em;
     }
 </style>
 

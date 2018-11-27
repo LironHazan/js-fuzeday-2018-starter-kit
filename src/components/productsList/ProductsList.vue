@@ -10,27 +10,17 @@
 </template>
 
 <script>
-import { client } from '../../services/shopify-client';
 import Product from './Product.vue'
 
 	export default {
         name: 'ProductsList',
         props: {
-            msg: String
+            msg: String,
+          products: [],
         },
         components: {
             Product
         },
-        data: function () {
-            return { products: [] };
-        },
-        mounted: function () {
-            client.product.fetchAll()
-                .then((products) => {
-                    console.log(products)
-                    this.products = products;
-                });
-        }
 	}
 </script>
 

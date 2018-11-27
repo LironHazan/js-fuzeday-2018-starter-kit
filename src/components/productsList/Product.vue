@@ -1,11 +1,14 @@
 <template>
+<div class="product" @click="goToProduct">
     <ProductCard
+        class="product"
         :id="product.id"
         :title="product.title"
         :image="image"
         :priceRange="priceRange"
         @add-item="addToCart"
     />
+</div>
 </template>
 <script>
     import ProductCard from '@/components/sharable/ProductCard.vue';
@@ -35,7 +38,17 @@
                         [this.product.variants[0].id]: itemData.quantity,
                     }
                 });
-            }
+            },
+            goToProduct: function() {
+			    this.$router.push({path: `/product/${id}` });
+		    }
         }
     }
 </script>
+<style scoped lang="scss">
+	.product {
+		height: 100%;
+        display: flex;
+        flex-direction: column;
+	}
+</style>

@@ -2,7 +2,6 @@
 	<div>
 		<v-container>
 			<v-layout align-start>
-				<h1>Products List </h1>
 			</v-layout>
 			<v-layout align-center>
 				<v-container fluid grid-list-lg>
@@ -40,5 +39,9 @@ import Product from './Product.vue'
 <style scoped lang="scss">
 	h3 {
 		margin: 40px 0 0;
+	}
+	.theme--light.v-card {
+		display: flex;
+		flex-direction: column;
 	}
 </style>

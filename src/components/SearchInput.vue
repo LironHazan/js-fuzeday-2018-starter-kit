@@ -59,10 +59,8 @@
 <script>
   export default {
     name: 'SearchInput',
-    props: {
-
-    },
-    data: () => {
+    props: {},
+    data: function () {
       return {
         searchTerm: 'test me 1',
         items: [],
@@ -70,9 +68,11 @@
         isLoading: false,
       };
     },
-    watch: { 
-      searchTerm (val) {
+    watch: {
+      searchTerm(val) {
         console.log(val);
+        console.log('in search input: ', val)
+        this.$emit('search', val);
       },
     }
   }

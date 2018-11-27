@@ -2,14 +2,14 @@
     <div class="hello">
         <v-data-table
                 :headers="headers"
-                :items="productsInCart"
+                :items="$store.getters.inCart"
                 class="elevation-1"
         >
             <template slot="items" slot-scope="props">
-                <td>{{ props.item.title }}</td>
-                <td class="text-xs-right">{{ props.item.itemId }}</td>
-                <td class="text-xs-right">{{ props.item.vendor }}</td>
-                <td class="text-xs-right" @click="removeItem(item.itemId)">X</td>
+                <td class="text-xs-right">{{ props.item.product.id }}</td>
+                <td class="text-xs-right">{{ props.item.product.title }}</td>
+                <td class="text-xs-right">{{ props.item.quantity }}</td>
+                <td class="text-xs-right remove-item" @click="removeItem(props.item.product.id)">X</td>
             </template>
         </v-data-table>
     </div>
@@ -24,19 +24,18 @@
         },
         data: function () {
             return {
-                productsInCart: this.$store.getters.inCart,
                 headers: [
-                    {
-                        text: 'Title',
-                        value: 'title'
-                    },
                     {
                         text: 'ID',
                         value: 'id'
                     },
                     {
-                        text: 'Vendor',
-                        value: 'vendor'
+                        text: 'Title',
+                        value: 'title'
+                    },
+                    {
+                        text: 'Quantity',
+                        value: 'quantity'
                     },
                     {
                         text: 'Remove Item',
@@ -49,6 +48,7 @@
         },
         methods: {
             removeItem: function (id) {
+                console.log('remove item id: ', id)
                 this.$store.dispatch('removeCartItem', id);
             }
         }
@@ -61,6 +61,10 @@
         margin: auto;
         width: 90%;
         border: 1px solid black;
+        cursor: pointer;
+    }
+
+    .remove-item {
         cursor: pointer;
     }
 

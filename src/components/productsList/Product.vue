@@ -3,7 +3,7 @@
         :id="product.id"
         :title="product.title"
         :image="image"
-        @add-item="addItem"
+        @add-item="addToCart"
     />
 </template>
 <script>
@@ -25,9 +25,9 @@
             }
         },
         methods: {
-            addItem: function(itemData) {
-                this.$emit('add-item', itemData);
-            },
+            addToCart: function(itemData) {
+                this.$store.dispatch('addToCart', {product: this.product, quantity: itemData.quantity});
+            }
         }
     }
 </script>

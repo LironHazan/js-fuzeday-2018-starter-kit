@@ -1,9 +1,9 @@
 <template>
 	<div class="navbar">
-		<router-link to="/"><img alt="Home" class="logo" src="../assets/logo.png"></router-link>
-		<router-link to="/">Home</router-link>
+		<router-link to="/"><img alt="Products" class="logo" src="../assets/logo.png"></router-link>
+		<router-link to="/">Products</router-link>
 		|
-		<router-link to="/help">Help</router-link>
+		<router-link to="/cart">Cart</router-link>
 	</div>
 </template>
 

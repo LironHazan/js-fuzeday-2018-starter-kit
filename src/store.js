@@ -11,12 +11,24 @@ export default new Vuex.Store({
         setCartItems: (state, items) => {
             state.inCart = items;
             return state;
+        },
+        removeCartItem: (state, id) => {
+            let newCartList = [];
+            for (let i = 0; i < state.inCart.length; i++) {
+                if (state.inCart[i].id === id) {
+                    continue
+                }
+                newCartList.push(state.inCart[i])
+            }
+            state.inCart = newCartList
+            return state;
         }
     },
     getters: {
         inCart: (state) => state.inCart
     },
     actions: {
-        setCartItems: (context, items) => context.commit('setCartItems', items)
+        setCartItems: (context, items) => context.commit('setCartItems', items),
+        removeCartItem: (context, id) => context.commit('removeCartItem', id)
     }
 })

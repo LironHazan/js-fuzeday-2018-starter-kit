@@ -1,23 +1,21 @@
 <template>
     <div class="hello">
-        <table class="cart-table">
-            <tr>
-                <th>Title</th>
-                <th>Id</th>
-                <th>Created At</th>
-                <th>Tags</th>
-                <th>Vendor</th>
-                <th>Description</th>
-            </tr>
-            <tr v-for="item in productsInCart">
-
-            </tr>
-        </table>
+        <v-data-table
+                :headers="headers"
+                :items="productsInCart"
+                class="elevation-1"
+        >
+            <template slot="items" slot-scope="props">
+                <td>{{ props.item.title }}</td>
+                <td class="text-xs-right">{{ props.item.id }}</td>
+                <td class="text-xs-right">{{ props.item.vendor }}</td>
+                <td class="text-xs-right" @click="removeItem(item.id)">X</td>
+            </template>
+        </v-data-table>
     </div>
 </template>
 
 <script>
-    import {client} from '../../services/shopify-client';
 
     export default {
         name: 'Cart',
@@ -25,9 +23,34 @@
             msg: String
         },
         data: function () {
-            return {productsInCart: this.$store.getters.inCart};
+            return {
+                productsInCart: this.$store.getters.inCart,
+                headers: [
+                    {
+                        text: 'Title',
+                        value: 'title'
+                    },
+                    {
+                        text: 'ID',
+                        value: 'id'
+                    },
+                    {
+                        text: 'Vendor',
+                        value: 'vendor'
+                    },
+                    {
+                        text: 'Remove Item',
+                        value: 'removeItem'
+                    }
+                ]
+            };
         },
         mounted: function () {
+        },
+        methods: {
+            removeItem: function (id) {
+                this.$store.dispatch('removeCartItem', id);
+            }
         }
     }
 </script>
